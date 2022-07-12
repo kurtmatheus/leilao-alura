@@ -3,26 +3,22 @@ package br.com.alura.leilao.leiloes;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LeilaoPage {
+import br.com.alura.leilao.PageObject;
+
+public class LeilaoPage extends PageObject{
 	private static final String URL_LEILOES = "http://localhost:8080/leiloes";
-	private WebDriver browser;
 	
 	public LeilaoPage(WebDriver browser) {
-		this.browser = browser;;
+		super(browser);
 	}
-
-	public void fechar() {
-		this.browser.quit();		
-	}
-
+	
 	public boolean isPaginaLeilao() {
-		return browser.getCurrentUrl().equals(URL_LEILOES);
-
+		return this.browser.getCurrentUrl().equals(URL_LEILOES);
 	}
 
 	public String getNomeUsuarioLogado() {
 		try {
-			return browser.findElement(By.id("usuario-logado")).getText();
+			return this.browser.findElement(By.id("usuario-logado")).getText();
 		} catch (Exception e) {
 			return null;
 		}
@@ -33,11 +29,11 @@ public class LeilaoPage {
 	}
 
 	public boolean contemTexto(String texto) {
-		return browser.getPageSource().contains(texto);
+		return this.browser.getPageSource().contains(texto);
 	}
 	 
 	public CadastroLeilaoPage carregaFormularioNovoLeilao() {
 		this.browser.findElement(By.id("novo_leilao_link")).click();
-		return new CadastroLeilaoPage(browser);
+		return new CadastroLeilaoPage(this.browser);
 	}
 }

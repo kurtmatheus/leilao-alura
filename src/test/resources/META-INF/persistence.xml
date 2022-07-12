@@ -5,9 +5,9 @@
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
     <persistence-unit name="tests" transaction-type="RESOURCE_LOCAL">
-    	<class>br.com.alura.leilao.dao.LanceDao</class>
-    	<class>br.com.alura.leilao.dao.LeilaoDao</class>
-    	<class>br.com.alura.leilao.dao.UsuarioDao</class>
+    	<class>br.com.alura.leilao.model.Lance</class>
+    	<class>br.com.alura.leilao.model.Leilao</class>
+    	<class>br.com.alura.leilao.model.Usuario</class>
     	<properties>
     		<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
     		<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:leiloes_test"/>

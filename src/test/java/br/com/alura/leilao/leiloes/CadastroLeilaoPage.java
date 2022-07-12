@@ -4,12 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class CadastroLeilaoPage {
+import br.com.alura.leilao.PageObject;
 
-	private WebDriver browser;
+public class CadastroLeilaoPage extends PageObject {
+
+	private static final String URL_CADASTRO_LEILAO = "http://localhost:8080/leiloes/new";
+	private static final String URL_LEILOES = "http://localhost:8080/leiloes";
 
 	public CadastroLeilaoPage(WebDriver browser) {
-		this.browser = browser;
+		super(browser);
 	}
 
 	public LeilaoPage cadastrarLeilao(String nome, String valorInicial, String dataAbertura) {
@@ -17,7 +20,7 @@ public class CadastroLeilaoPage {
 		this.browser.findElement(By.id("valorInicial")).sendKeys(valorInicial);
 		this.browser.findElement(By.id("dataAbertura")).sendKeys(dataAbertura);
 		this.browser.findElement(By.id("button-submit")).submit();
-		return new LeilaoPage(browser);
+		return new LeilaoPage(this.browser);
 	}
 
 	public boolean isLeilaoCadastrado(String nome, String valorInicial, String dataAbertura) {
@@ -29,6 +32,22 @@ public class CadastroLeilaoPage {
 		return colunaNome.getText().equals(nome)
 				&& colunaValor.getText().equals(valorInicial)
 				&& colunaData.getText().equals(dataAbertura);
+	}
+
+	public boolean isPaginaAtual() {
+		return this.browser.getCurrentUrl().equals(URL_CADASTRO_LEILAO);
+	}
+
+	public boolean isMensagensDeValidacaoVisiveis() {
+		String pageSource = this.browser.getPageSource();
+		return pageSource.contains("minimo 3 caracteres")
+				&& pageSource.contains("não deve estar em branco")
+				&& pageSource.contains("deve ser um valor maior de 0.1")
+				&& pageSource.contains("deve ser uma data no formato dd/MM/yyyy");
+	}
+
+	public boolean isPaginaLeilao() {
+		return this.browser.getCurrentUrl().equals(URL_LEILOES);
 	}
 
 }
