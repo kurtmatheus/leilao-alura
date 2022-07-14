@@ -1,8 +1,6 @@
 package br.com.alura.leilao.login;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import br.com.alura.leilao.PageObject;
 import br.com.alura.leilao.leiloes.LeilaoPage;
